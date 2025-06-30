@@ -1,0 +1,20 @@
+
+Interview Report for Anonymous
+Role: ""
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 3m 41s
+Average Rating: 5.3/10
+Overall Performance: Low
+
+Conversation Transcript with Feedback:
+Q1: Since you are a fresher, tell me about your educational background and any projects or internships you may have completed.
+Response: I have done the Python and certification program after the graduation and his that  I have worked on  a heart been worked on  medical insurance price prediction project which is which was based on much learning algorithms  and also I have done the internship in the end that also I have done the AIB interview bought project
+Q2: What was the most challenging course you took during your education, and why did you find it challenging?
+Response: there are many challenges regarding the portion that I am very challenges there are many challenges regarding latest updates continuously updating AI in a year field so  that's why did the challenging
+Q3: What technical skills or tools did you utilize in your projects or internships, and how did you learn them?
+Response: there are many technical skills which are Python and SQL languages social learning algorithm and  large language model generating AI natural language processing
+Q4: What programming languages are you proficient in, and what is your favorite language to work with?
+
+End of Report

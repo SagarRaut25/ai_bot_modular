@@ -1,0 +1,20 @@
+
+Interview Report for Sagar Raut
+Role: "Python developer"
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 3m 18s
+Average Rating: 5.9/10
+Overall Performance: Low
+
+Conversation Transcript with Feedback:
+Q1: You have mentioned Python and SQL as your preferred languages. Can you explain the key differences between the two and why you might choose one over the other for a specific task?
+Response: differences between the Python and SQL art Python is used for data analysis visualisation and SQL is used for special purpose language and while while for the data analysis we use Python and for the data print processing joining the data multiples that's for those purposes  have to use SQL
+Q2: What are some of the key features of Python that make it a popular choice for developers?
+Response: there are many Inki features of python like Python is open source and it is a free  millions of libraries for the and its useful for the data reprocessing data handling
+Q3: Can you provide an example of when you would opt for SQL over Python and explain your reasoning?
+Response: I want option for SQL or Python at the time of joining the tables  and it got SQL is special purpose language
+Q4: Can you provide an example of a specific task where you would prefer to use Python over SQL for data analysis and explain why?
+
+End of Report

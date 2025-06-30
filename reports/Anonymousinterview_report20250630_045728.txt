@@ -1,0 +1,18 @@
+
+Interview Report for Anonymous
+Role: ""
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 3m 28s
+Average Rating: 5.9/10
+Overall Performance: Low
+
+Conversation Transcript with Feedback:
+Q1: Given your fresh graduate status, what programming languages and software development tools are you proficient in?
+Response: Python SQL languages and machine learning algorithms  these are the techniques and languages and tools and also text processing tools  for takes extracting tools that tools and professional team this type of tools
+Q2: Can you provide examples of personal or academic projects where you applied these skills effectively?
+Response: yes I have done one project which is based on medical insurance with price prediction based on machine learning algorithms in this well  I am  applied this skills effectively
+Q3: How do you stay updated with the latest trends and advancements in these programming languages and tools?
+
+End of Report
