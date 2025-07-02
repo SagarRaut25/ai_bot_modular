@@ -215,6 +215,8 @@ def check_pause():
     
     return jsonify({"status": "active"})
 
+
+
 @interview_bp.route('/process_answer', methods=['POST'])
 def process_answer():
     logger.info("Process answer request received")
@@ -341,24 +343,85 @@ def process_answer():
         "has_follow_up": len(interview_data['follow_up_questions']) > 0,
         "feedback_audio": feedback_audio
     })
-    
-@interview_bp.route('/interview/<token>/')
+
+
+
+# @interview_bp.route('/interview/<token>/')
+# def interview(token):
+#     try:
+#         # Ensure the DJANGO_API_URL is used correctly
+#         interview_url = f"{DJANGO_API_URL}{token}/"  # Using DJANGO_API_URL from config
+#         response = requests.get(interview_url, timeout=30)  # Setting timeout to 30 seconds
+#         logger.debug(f"🔍 Requesting interview data from: {interview_url}")
+#         logger.debug("Current session data before Django call:", dict(session))
+#         logger.debug("🌐 Response status:", response.status_code)
+
+#         if response.status_code == 200:
+#             data = response.json()
+#             logger.debug("✅ Data received from Django:", data)
+
+#             match_id = data.get('id')
+#             session['id'] = match_id
+#             logger.debug(f"Session ID set: {session['id']}")
+
+#             resume_jd_url = f"https://ibot-backend.onrender.com/jobs/resume-jd-by-id/{match_id}/"
+#             resume_jd_response = requests.get(resume_jd_url, timeout=30)
+
+#             if resume_jd_response.status_code == 200:
+#                 resume_jd_data = resume_jd_response.json()
+
+#                 # Store Resume & JD info in Flask session
+#                 session['resume_text'] = resume_jd_data.get('resume_text')
+#                 session['jd_text'] = resume_jd_data.get('jd_text')
+#                 session['organization_name'] = resume_jd_data.get('organization_name')
+#                 session['job_title'] = resume_jd_data.get('job_title')
+#                 session['email'] = resume_jd_data.get('email')
+#                 session['candidate_name'] = resume_jd_data.get('candidate_name')
+
+#                 logging.debug("Stored Resume & JD in session: %s", session)
+
+#                 # Optionally combine all data for template
+#                 full_data = {**data, **resume_jd_data}
+
+#                 return render_template("index.html", data=full_data)
+
+#             else:
+#                 logger.warning(f"❌ Resume and JD data not found or error occurred. Status: {resume_jd_response.status_code}")
+#                 return render_template("error.html", message="❌ Unable to fetch resume and JD."), 500
+
+#         elif response.status_code == 403:
+#             logger.warning("❌ Interview already completed.")
+#             return render_template("error.html", message="✅ Interview already completed."), 403
+#         elif response.status_code == 404:
+#             logger.warning("❌ Invalid or expired interview link.")
+#             return render_template("error.html", message="❌ Invalid or expired interview link."), 404
+#         elif response.status_code == 410:
+#             logger.warning("❌ Interview link has expired.")
+#             return render_template("error.html", message="❌ Interview link has expired."), 410
+#         else:
+#             logger.error(f"❌ Unexpected status code: {response.status_code}")
+#             logger.error(f"❌ Response content: {response.text}")
+#             return render_template("error.html", message="Something went wrong. Please try again later."), 500
+
+#     except requests.Timeout:
+#         logger.error(f"❌ Request timed out while fetching data for token: {token}")
+#         return render_template("error.html", message="⚠ Server timeout. Please try again later."), 504
+#     except Exception as e:
+#         logger.error(f"❌ Exception while contacting Django: {str(e)}")
+#         return render_template("error.html", message="⚠ Server error while retrieving interview data."), 500
+
+
+@interview_bp.route('/interview/<token>/', methods=['GET'])
 def interview(token):
     try:
-        # Ensure the DJANGO_API_URL is used correctly
-        interview_url = f"{DJANGO_API_URL}{token}/"  # Using DJANGO_API_URL from config
-        response = requests.get(interview_url, timeout=30)  # Setting timeout to 30 seconds
+        interview_url = f"{DJANGO_API_URL}{token}/"
+        response = requests.get(interview_url, timeout=30)
         logger.debug(f"🔍 Requesting interview data from: {interview_url}")
-        logger.debug("Current session data before Django call:", dict(session))
-        logger.debug("🌐 Response status:", response.status_code)
 
         if response.status_code == 200:
             data = response.json()
-            logger.debug("✅ Data received from Django:", data)
-
             match_id = data.get('id')
             session['id'] = match_id
-            logger.debug(f"Session ID set: {session['id']}")
 
             resume_jd_url = f"https://ibot-backend.onrender.com/jobs/resume-jd-by-id/{match_id}/"
             resume_jd_response = requests.get(resume_jd_url, timeout=30)
@@ -366,7 +429,7 @@ def interview(token):
             if resume_jd_response.status_code == 200:
                 resume_jd_data = resume_jd_response.json()
 
-                # Store Resume & JD info in Flask session
+                # Store Resume & JD info in session (optional for React)
                 session['resume_text'] = resume_jd_data.get('resume_text')
                 session['jd_text'] = resume_jd_data.get('jd_text')
                 session['organization_name'] = resume_jd_data.get('organization_name')
@@ -374,34 +437,41 @@ def interview(token):
                 session['email'] = resume_jd_data.get('email')
                 session['candidate_name'] = resume_jd_data.get('candidate_name')
 
-                logging.debug("Stored Resume & JD in session: %s", session)
+                logger.debug("✅ Combined interview + resume data prepared")
 
-                # Optionally combine all data for template
-                full_data = {**data, **resume_jd_data}
-
-                return render_template("index.html", data=full_data)
+                return jsonify({
+                    "status": "success",
+                    "interview": data,
+                    "resume_jd": resume_jd_data
+                })
 
             else:
-                logger.warning(f"❌ Resume and JD data not found or error occurred. Status: {resume_jd_response.status_code}")
-                return render_template("error.html", message="❌ Unable to fetch resume and JD."), 500
+                logger.warning(f"❌ Failed to fetch resume & JD. Status: {resume_jd_response.status_code}")
+                return jsonify({
+                    "status": "error",
+                    "message": "Failed to fetch resume and JD."
+                }), 500
 
         elif response.status_code == 403:
-            logger.warning("❌ Interview already completed.")
-            return render_template("error.html", message="✅ Interview already completed."), 403
+            return jsonify({"status": "error", "message": "Interview already completed."}), 403
         elif response.status_code == 404:
-            logger.warning("❌ Invalid or expired interview link.")
-            return render_template("error.html", message="❌ Invalid or expired interview link."), 404
+            return jsonify({"status": "error", "message": "Invalid or expired interview link."}), 404
         elif response.status_code == 410:
-            logger.warning("❌ Interview link has expired.")
-            return render_template("error.html", message="❌ Interview link has expired."), 410
+            return jsonify({"status": "error", "message": "Interview link has expired."}), 410
         else:
-            logger.error(f"❌ Unexpected status code: {response.status_code}")
-            logger.error(f"❌ Response content: {response.text}")
-            return render_template("error.html", message="Something went wrong. Please try again later."), 500
+            return jsonify({
+                "status": "error",
+                "message": f"Unexpected status: {response.status_code}"
+            }), 500
 
     except requests.Timeout:
-        logger.error(f"❌ Request timed out while fetching data for token: {token}")
-        return render_template("error.html", message="⚠ Server timeout. Please try again later."), 504
+        return jsonify({
+            "status": "error",
+            "message": "Timeout while contacting Django API"
+        }), 504
     except Exception as e:
-        logger.error(f"❌ Exception while contacting Django: {str(e)}")
-        return render_template("error.html", message="⚠ Server error while retrieving interview data."), 500
+        logger.error(f"Exception during token fetch: {e}")
+        return jsonify({
+            "status": "error",
+            "message": "Unexpected server error"
+        }), 500
