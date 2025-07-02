@@ -118,7 +118,7 @@ def create_app():
     Session(app)
 
     # ====== CORS for React (localhost:3000) ======
-    CORS(app, origins=["http://localhost:3000"])
+    CORS(app)
 
     # ====== Logging ======
     logs_dir = os.path.join(os.getcwd(), 'logs')
@@ -156,7 +156,7 @@ def create_app():
 # Run the Flask app
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
 
 
