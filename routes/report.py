@@ -94,6 +94,10 @@ def generate_report():
         "admin_report_filename": admin_filename
     })
 
+
+
+
+
 @report_bp.route('/download_report/<filename>')
 def download_report(filename):
     folder = 'reports'
