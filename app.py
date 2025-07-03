@@ -103,7 +103,7 @@ from utils.helpers import init_interview_data
 
 def create_app():
     app = Flask(__name__)
-
+    CORS(app, supports_credentials=True, origins=["http://localhost:5173","http://localhost:5174","http://localhost:5172","http://localhost:8080"])
     # ====== Basic Configs ======
     app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
 
