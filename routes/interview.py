@@ -101,6 +101,7 @@ def start_interview():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
+
 @interview_bp.route('/get_question', methods=['GET'])
 def get_question():
     logger.debug("Get question request received")

@@ -12,6 +12,9 @@ class Config:
     SESSION_COOKIE_NAME = 'session'
     SESSION_FILE_DIR = os.path.join(os.getcwd(), 'flask_session_data')
 
+    SESSION_COOKIE_SAMESITE = 'None'
+    SESSION_COOKIE_SECURE = True
+
     # Cohere API Key - Loaded securely from environment variables
     COHERE_API_KEY = os.getenv('COHERE_API_KEY', 'your-cohere-api-key-here')  # Default for dev
 
