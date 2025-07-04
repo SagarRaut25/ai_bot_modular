@@ -92,6 +92,11 @@ from routes.interview import interview_bp
 from routes.report import report_bp
 from routes.session import session_bp
 from utils.helpers import init_interview_data
+import cohere
+
+from config import Config
+
+co = cohere.Client(Config.COHERE_API_KEY)
 
 
 
