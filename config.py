@@ -1,12 +1,22 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+# # Load environment variables from .env file
+# load_dotenv()
+# print("COHERE_API_KEY from .env:", os.getenv('COHERE_API_KEY'))
+
+
+
+import os
+from dotenv import load_dotenv
+
 load_dotenv()
-print("COHERE_API_KEY from .env:", os.getenv('COHERE_API_KEY'))
+
+
 
 class Config:
     # Flask Session Configurations
+    COHERE_API_KEY = os.getenv("COHERE_API_KEY")
     SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key-here')
     SESSION_TYPE = 'filesystem'
     SESSION_COOKIE_NAME = 'session'

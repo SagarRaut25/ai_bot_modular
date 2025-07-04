@@ -76,13 +76,16 @@
 
 
 
-
 from flask import Flask, session, jsonify
 from flask_session import Session
 from flask_cors import CORS
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+from dotenv import load_dotenv  # ✅ Load .env file
+
+# Load environment variables BEFORE anything else
+load_dotenv()
 
 # Import Blueprints
 from routes.interview import interview_bp
@@ -91,8 +94,11 @@ from routes.session import session_bp
 from utils.helpers import init_interview_data
 
 
+
+
 def create_app():
     app = Flask(__name__)
+  
 
     # ✅ Only call CORS ONCE, with credentials & proper origins
     CORS(app, supports_credentials=True, origins=[
