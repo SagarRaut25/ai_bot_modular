@@ -89,9 +89,6 @@
 
 
 
-
-
-
 import base64
 import tempfile
 import os
@@ -120,8 +117,7 @@ def text_to_speech(text: str) -> str:
         os.unlink(temp_filename)
 
         logger.debug("Successfully converted to base64 audio")
-        # return f"data:audio/mpeg;base64,{base64.b64encode(audio_data).decode('utf-8')}"
-        return base64.b64encode(audio_data).decode("utf-8")
+        return f"data:audio/mpeg;base64,{base64.b64encode(audio_data).decode('utf-8')}"
 
     except gTTSError as e:
         logger.error(f"gTTS 429 or connection error: {str(e)}")
