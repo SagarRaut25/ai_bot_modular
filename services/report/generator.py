@@ -1,13 +1,12 @@
-# services/report_service.py
-
 import logging
 from datetime import datetime, timezone
-from .tts_service import text_to_speech
-from .cohere_service import co
+from services.tts_service import text_to_speech
+from services.cohere.client import co
 from utils.file_utils import html_to_pdf
 import os
 
 logger = logging.getLogger(__name__)
+
 def generate_interview_report(interview_data):
     try:
         # Calculate interview duration
@@ -250,99 +249,3 @@ The feedback should:
             "voice_feedback": "We encountered an error generating your feedback.",
             "voice_audio": None
         }
-
-
-def create_text_report_from_interview_data(interview_data):
-    candidate = interview_data.get('candidate_name', 'Unknown Candidate')
-    role = interview_data.get('role', 'Unknown Role')
-    exp_level = interview_data.get('experience_level', 'Unknown')
-    years = interview_data.get('years_experience', 0)
-
-    conv_history = interview_data.get("conversation_history", [])
-
-    # We expect pairs: question (bot), answer (user)
-    conversation_lines = []
-    i = 0
-    n = len(conv_history)
-    question_counter = 1
-    while i < n:
-        # Question from bot
-        q_item = conv_history[i]
-        if q_item.get("speaker", "").lower() == "bot":
-            question_text = q_item.get("text", "")
-            conversation_lines.append(f"Q{question_counter}: {question_text}")
-        else:
-            i += 1
-            continue
-
-        # Answer from user (should be next)
-        if i + 1 < n:
-            a_item = conv_history[i + 1]
-            if a_item.get("speaker", "").lower() == "user":
-                answer_text = a_item.get("text", "")
-                conversation_lines.append(f"Response: {answer_text}")
-
-                # Add feedback label if present
-                feedback_label = a_item.get("feedback_label")
-                if feedback_label:
-                    conversation_lines.append(f"  → Feedback: {feedback_label}")
-
-        question_counter += 1
-        i += 2  # Move to next Q&A pair
-
-    conversation_text = "\n".join(conversation_lines)
-    # Calculate average rating
-    ratings = interview_data.get('ratings', [])
-    avg_rating = sum(ratings) / len(ratings) if ratings else 0
-
-    # Determine performance level
-    if avg_rating >= 8:
-        performance = "High"
-    elif avg_rating >= 6:
-        performance = "Moderate"
-    elif avg_rating >= 4:
-        performance = "Low"
-    else:
-        performance = "Poor"
-
-    # Calculate duration
-    duration = "N/A"
-    if interview_data.get('start_time') and interview_data.get('end_time'):
-        duration_seconds = (interview_data['end_time'] - interview_data['start_time']).total_seconds()
-        minutes = int(duration_seconds // 60)
-        seconds = int(duration_seconds % 60)
-        duration = f"{minutes}m {seconds}s"
-
-    report_txt = f"""
-Interview Report for {candidate}
-Role: {role}
-Experience Level: {exp_level}
-Years of Experience: {years}
-
-Interview Duration: {duration}
-Average Rating: {avg_rating:.1f}/10
-Overall Performance: {performance}
-
-Conversation Transcript with Feedback:
-{conversation_text}
-
-End of Report
-"""
-    return report_txt
-
-def save_admin_report_txt(interview_data):
-    report_txt = create_text_report_from_interview_data(interview_data)
-    
-    candidate = interview_data.get("candidate_name", "unknown").replace(" ", "_")
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    filename = f"{candidate}interview_report{timestamp}.txt"
-
-    reports_folder = os.path.join(os.getcwd(), "reports")
-    if not os.path.exists(reports_folder):
-        os.makedirs(reports_folder)
-
-    filepath = os.path.join(reports_folder, filename)
-    with open(filepath, "w", encoding="utf-8") as f:
-        f.write(report_txt)
-
-    return filepath, filename

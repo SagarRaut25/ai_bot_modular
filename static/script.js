@@ -103,15 +103,23 @@ $(document).ready(function() {
 
     // Generate report
     function generateReport() {
+    $('#generateReportBtn').prop('disabled', true).text('Generating...');
+
         $.ajax({
             url: '/report/generate_report',
             type: 'POST',
             success: function(response) {
+                $('#generateReportBtn').prop('disabled', false).text('Generate Report');
+
                 if (response.status === 'success') {
+                    if (!response.report || !response.report_filename) {
+                        alert("Incomplete report data received. Please try again.");
+                        return;
+                    }
+
                     $('.interview-section').hide();
                     $('.report-section').show();
-                    
-                    // Display summary
+
                     let summaryHtml = `
                         <h4>Interview Results</h4>
                         <div class="result-card mb-3 p-3 bg-light rounded">
@@ -130,20 +138,32 @@ $(document).ready(function() {
                         <h5 class="mt-4">Detailed Feedback</h5>
                         <div class="feedback-text">${formatReportText(response.report)}</div>
                     `;
-                    
+
                     $('#reportSummary').html(summaryHtml);
-                    
+
                     // Set up download button
                     $('#downloadReportBtn').off('click').click(function() {
                         window.location.href = `/download_report/${response.report_filename}`;
                     });
+
+                } else {
+                    alert('Report generation failed: ' + response.message);
                 }
             },
             error: function(xhr) {
-                alert('Error generating report: ' + xhr.responseJSON?.message || 'Unknown error');
+                $('#generateReportBtn').prop('disabled', false).text('Generate Report');
+                let errorMsg = 'Unknown error';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMsg = xhr.responseJSON.message;
+                } else if (xhr.responseText) {
+                    errorMsg = xhr.responseText;
+                }
+                alert('Error generating report: ' + errorMsg);
+                console.error('🔴 Report Generation Failed:', errorMsg, xhr);
             }
         });
     }
+
 
     // Restart interview
     $('#restartInterviewBtn').click(function() {

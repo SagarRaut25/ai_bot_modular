@@ -8,12 +8,16 @@ import pdfkit
 from flask import Blueprint, session, jsonify, send_from_directory
 from datetime import datetime, timezone
 
-from services.report_service import generate_interview_report, save_admin_report_txt
+# ✅ correct (use new structure)
+from services.report.generator import generate_interview_report
+from services.report.file_manager import save_admin_report_txt
 from utils.file_utils import html_to_pdf
 from utils.helpers import init_interview_data
 
 logger = logging.getLogger(__name__)
-report_bp = Blueprint('report', __name__)
+
+report_bp = Blueprint('report_bp', __name__,url_prefix='/report')
+
 CONVERSATION_FILE = "interview_conversation.txt"
 PDF_OUTPUT_DIR = os.path.join(os.getcwd(), "reports")
 os.makedirs(PDF_OUTPUT_DIR, exist_ok=True)

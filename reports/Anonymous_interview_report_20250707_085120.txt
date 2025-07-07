@@ -1,0 +1,19 @@
+Interview Report for Anonymous
+Role: ""
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 7m 48s
+Average Rating: 5.5/10
+Overall Performance: Low
+
+Conversation Transcript with Feedback:
+Q1: Since you are a fresher, tell me about your educational background and any projects or internships you may have completed during your studies.
+Response: I have done projects on muscle learning cross prediction
+Q2: What technical skills have you developed through your academic projects or internships, and how do you plan to apply them in a professional setting?
+Response: Meri technical skills I developed through the projects like  generating a and generative AI  Natural Language Processing large language modelling  Tex free processing data handling  Python and machine learning algorithms
+Q3: Can you provide an example of a project where you had to apply these technical skills to solve a complex problem?
+Response: machine learning price prediction project and AI based voice interview about in this project I applied this technical skills to solve Complex problem
+Q4: How do you keep yourself updated with the latest advancements and trends in your field?
+
+End of Report

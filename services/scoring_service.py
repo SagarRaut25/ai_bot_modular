@@ -1,7 +1,7 @@
 # services/scoring_service.py
 
 import logging
-from services.cohere_service import co
+from services.cohere.client import co
 
 logger = logging.getLogger(__name__)
 

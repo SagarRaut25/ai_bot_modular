@@ -1,0 +1,17 @@
+Interview Report for Anonymous
+Role: ""
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 3m 25s
+Average Rating: 5.6/10
+Overall Performance: Low
+
+Conversation Transcript with Feedback:
+Q1: Since you're a fresher, tell me about your educational background and any projects or internships you may have undertaken that you feel are relevant to this role.
+Response: have done graduation in mechanical after that I speak to the data science  and in that I have done the projects on machine learning which are bank loan prediction machine learning price prediction and also I have done the internship and that I have done AI based voice interview got
+Q2: What specific skills or knowledge from your educational background do you think will be most applicable to this position?
+Response: attend the certification program in Python and data science this will help  this will be more applicable to this position
+Q3: Can you elaborate on any challenges or obstacles you faced during your projects or internships and how you approached solving them? ---
+
+End of Report
