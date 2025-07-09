@@ -1,0 +1,19 @@
+Interview Report for Anonymous
+Role: ""
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 3m 23s
+Average Rating: 4.9/10
+Overall Performance: Low
+
+Conversation Transcript with Feedback:
+Q1: Since your resume indicates a preference for Python, can you explain its significance in data analytics and any key libraries or frameworks you've utilized for this purpose?
+Response: very important factor for the data handling and data  is used in many projects we got the visualisation of data we got more clarity and understand the behaviour of data that's why important factor
+Q2: Can you provide an example of a project where you used Python to address a specific data analytics challenge and the outcome it yielded?
+Response: I have worked with projects in which I used python to address a specific Data Analytics which are  medical insurance price prediction and  bank loan prediction
+Q3: Are there any alternative programming languages or tools you've considered or plan to explore for data analytics tasks and why?
+Response: also there are many programming languages like Python SQL  are language
+Q4: Can you provide an example of a data visualization project where you utilized Python to gain valuable insights and how it influenced the project's outcome?
+
+End of Report

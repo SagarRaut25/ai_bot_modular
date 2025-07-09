@@ -1,0 +1,19 @@
+Interview Report for Dnyaneshwar Dhotre
+Role: "Python developer"
+Experience Level: fresher
+Years of Experience: 0
+
+Interview Duration: 3m 22s
+Average Rating: 3.0/10
+Overall Performance: Poor
+
+Conversation Transcript with Feedback:
+Q1: In your role at A2Z Infotech, what specific challenges did you face while working with PHP and CodeIgniter?
+Response: and the time of maintain ship I use the coordinator Pramod developed the application within PHP 143 the lightweight and easy to maintain for positive development
+Q2: Can you provide an example of how you utilized CodeIgniter's MVC architecture to overcome one of those challenges?
+Response: in PHP model you control where are we implement the code in the modular way
+Q3: How did you manage the transition from PHP to Python, and what benefits did you find in making that switch?
+Response: next question
+Q4: Can you give an example of how you utilized PHP to create a lightweight and maintainable application during your experience with CodeIgniter?
+
+End of Report

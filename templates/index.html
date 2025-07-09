@@ -516,7 +516,7 @@
             $(this).html('<i class="fas fa-spinner fa-spin"></i> Starting...').prop('disabled', true);
 
             $.ajax({
-                url: '/interview/start_interview',
+                url: '/jobs/interview/start_interview',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
@@ -565,7 +565,7 @@
 function askQuestion() {
     if (!interviewInProgress || totalSeconds <= 0) return;
 
-    $.get('/interview/get_question', function(response) {
+    $.get('/jobs/interview/get_question', function(response) {
         if (response.status === 'completed' || totalSeconds <= 0) {
             interviewComplete();
         } else if (response.status === 'success') {
@@ -660,7 +660,7 @@ function askQuestion() {
     conversationBox.find(`.user-message[data-question="${currentQuestionNum}"][data-answer="current"]`).removeAttr('data-answer');
 
     $.ajax({
-        url: '/interview/process_answer',
+        url: '/jobs/interview/process_answer',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
@@ -958,7 +958,7 @@ function showInterviewReport() {
     reportModal.show();
 
     $.ajax({
-        url: '/report/generate_report',
+        url: '/jobs/report/generate_report',
         type: 'GET',
         success: function(response) {
             if (response.status === 'success') {
@@ -1076,4 +1076,3 @@ function showInterviewReport() {
     </script>
 </body>
 </html>
-

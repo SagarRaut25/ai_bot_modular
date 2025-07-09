@@ -12,7 +12,7 @@ $(document).ready(function() {
         $(this).prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Starting...');
         
         $.ajax({
-            url: '/interview/start_interview',
+            url: 'jobs/interview/start_interview',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -50,7 +50,7 @@ $(document).ready(function() {
         $('#submitAnswerBtn').prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Submitting...');
         
         $.ajax({
-            url: '/interview/submit_answer',
+            url: 'jobs/interview/submit_answer',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -179,7 +179,7 @@ $(document).ready(function() {
     // Helper functions
     function getNextQuestion() {
         $.ajax({
-            url: '/interview/get_question',
+            url: '/jobs/interview/get_question',
             type: 'GET',
             success: function(response) {
                 if (response.status === 'completed') {
